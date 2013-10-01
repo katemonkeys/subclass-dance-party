@@ -9,5 +9,13 @@ FadeyDancer.prototype.constructor = FadeyDancer;
 
 FadeyDancer.prototype.step = function(){
   Dancer.prototype.step.call(this);
-  this.$node.fadeToggle();
+    var colString = '#';
+
+  for (var i=0;i<3;i++) {
+    var temp = Math.floor(Math.random()*255);
+    colString += temp.toString(16);
+  }
+
+  this.$node.css({"border": Math.random()*30 + "px solid " + colString, "background-color": "10px solid " + colString});
+  this.$node.animate({"padding": Math.random()*30 + 'px'});
 };
