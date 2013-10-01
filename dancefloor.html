@@ -8,6 +8,7 @@
     <script src="src/fadeyDancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
     <script src="src/moveNShaker.js"></script>
+    <script src="src/penguin.js"></script>
   </head>
   <body>
 
@@ -15,9 +16,10 @@
       <span class="title">object dance party</span>
       <a href="#" class="lineupButton">Line 'em Up!</a>
       <a href="#" class="animate">Animate!</a>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">add a blinky dancer</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">add a Blinky dancer</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="FadeyDancer">add a Fadey dancer</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="MoveNShaker">add a Mover N Shaker</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="Penguin">add a Penguin dancer</a>
 
 
     </div>
@@ -30,6 +32,7 @@
           $('span').css({left: 0});
         })
 
+       
         $(".addDancerButton").on("click", function(event){
           /* This function sets up the click handlers for the create-dancer
            * buttons on index.html. You should not need to alter it.
@@ -49,19 +52,42 @@
           var dancerMakerFunction = window[dancerMakerFunctionName];
 
           // make a dancer with a random position
+          var img = document.createElement('IMG');
+          img.setAttribute('src','src/tux.png');
 
           var dancer = new dancerMakerFunction(
             $("body").height() * Math.random(),
             $("body").width() * Math.random(),
-            Math.random() * 1000 + 100
+            Math.random() * 100
           );
           if (dancerMakerFunctionName === "BlinkyDancer") {
             dancer.$node.addClass("blinkyDancer");
+
+            var mouseX = 0, mouseY = 0;
+              $(document).mousemove(function(e){
+              mouseX = e.pageX;
+              mouseY = e.pageY;
+              });
+
+              // cache the selector
+              var follower = $(".blinkyDancer");
+              var xp = 0, yp = 0;
+              var loop = setInterval(function(){
+              // change 12 to alter damping, higher is slower
+              xp += (mouseX - xp) / 30;
+              yp += (mouseY - yp) / 30;
+              follower.css({left:xp, top:yp});
+              }, 30);
+
+
           } else if (dancerMakerFunctionName === "FadeyDancer") {
             dancer.$node.addClass("fadeyDancer");
           } else if (dancerMakerFunctionName === "MoveNShaker") {
-            dancer.$node.addClass("moveNShaker");
-          } 
+            dancer.$node.addClass("moveNShaker")
+          } else if (dancerMakerFunctionName === "Penguin") {
+            dancer.$node.addClass("penguin")
+            dancer.$node.append(img);
+          }
 
           $('body').append(dancer.$node);
         });

@@ -33,6 +33,14 @@ body, a:link, a:visited, a:active{
 
 .moveNShaker{
   border-radius:10px;
-  border: 10px solid red;
+  border: 10px ;
   position:absolute;
 }
+
+.penguin{
+  border-radius:10px;
+  border: 20px ;
+  position:absolute;
+  overflow: hidden;
+}
+
