@@ -5,18 +5,27 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="lib/jquery.js"></script>
     <script src="src/dancer.js"></script>
+    <script src="src/fadeyDancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
   </head>
   <body>
 
     <div class="topbar">
       <span class="title">object dance party</span>
+      <a href="#" class="lineupButton">Line 'em Up!</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">add a blinky dancer</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="FadeyDancer">add a Fadey dancer</a>
+
+
     </div>
 
     <script>
       $(document).ready(function(){
         window.dancers = [];
+
+        $(".lineupButton").on('click', function(event) {
+          $('span').css({left: 0});
+        })
 
         $(".addDancerButton").on("click", function(event){
           /* This function sets up the click handlers for the create-dancer
@@ -37,12 +46,18 @@
           var dancerMakerFunction = window[dancerMakerFunctionName];
 
           // make a dancer with a random position
+
           var dancer = new dancerMakerFunction(
             $("body").height() * Math.random(),
             $("body").width() * Math.random(),
-            Math.random() * 2000
+            Math.random() * 1000
           );
-
+          if (dancerMakerFunctionName === "BlinkyDancer") {
+            dancer.$node.addClass("blinkyDancer");
+          } else if (dancerMakerFunctionName === "FadeyDancer") {
+            dancer.$node.addClass("fadeyDancer");
+            //dancer.$node.cycle();
+          }
           $('body').append(dancer.$node);
         });
       });
