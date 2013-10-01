@@ -1,13 +1,14 @@
-var MoveNShaker = function(top, left, timeBetweenSteps){
+var Penguin = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   //canNOT call "arguments" here
   this.timeBetweenSteps = timeBetweenSteps;
+
 };
 
-MoveNShaker.prototype = Object.create(Dancer.prototype);
-MoveNShaker.prototype.constructor = MoveNShaker;
+Penguin.prototype = Object.create(Dancer.prototype);
+Penguin.prototype.constructor = Penguin;
 
-MoveNShaker.prototype.step = function(){
+Penguin.prototype.step = function(){
   Dancer.prototype.step.call(this);
   var colString = '#';
 
@@ -16,6 +17,7 @@ MoveNShaker.prototype.step = function(){
     colString += temp.toString(16);
   }
 
-  this.$node.css({"border": "10px solid " + colString, "border-radius": '10px'});
+
   this.$node.animate({"left":Math.random()*1400, "top":Math.random()*800}, 3000);
+  this.$node.css("transform","rotate("+Math.random()*180+"deg)");
 };
