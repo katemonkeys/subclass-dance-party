@@ -19,6 +19,10 @@ describe("blinkyDancer", function() {
     expect(blinkyDancer.$node.toggle.called).to.be.true;
   });
 
+  it("should increment the number of spans every time a dancer is added", function(){
+    expect(document.getElementsByTagName("span").length).to.be.equal(2);
+  });
+
   describe("dance", function(){
     it("should call step at least once per second", function(){
       sinon.spy(blinkyDancer, "step");
@@ -32,4 +36,6 @@ describe("blinkyDancer", function() {
       expect(blinkyDancer.step.callCount).to.be.equal(3);
     });
   });
+
+
 });

@@ -16,6 +16,7 @@ FadeyDancer.prototype.step = function(){
     colString += temp.toString(16);
   }
 
+  this.$node.fadeToggle();
   this.$node.css({"border": Math.random()*30 + "px solid " + colString, "background-color": "10px solid " + colString});
   this.$node.animate({"padding": Math.random()*30 + 'px'});
 };
