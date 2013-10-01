@@ -7,14 +7,17 @@
     <script src="src/dancer.js"></script>
     <script src="src/fadeyDancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
+    <script src="src/moveNShaker.js"></script>
   </head>
   <body>
 
     <div class="topbar">
       <span class="title">object dance party</span>
       <a href="#" class="lineupButton">Line 'em Up!</a>
+      <a href="#" class="animate">Animate!</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">add a blinky dancer</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="FadeyDancer">add a Fadey dancer</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="MoveNShaker">add a Mover N Shaker</a>
 
 
     </div>
@@ -50,16 +53,29 @@
           var dancer = new dancerMakerFunction(
             $("body").height() * Math.random(),
             $("body").width() * Math.random(),
-            Math.random() * 1000
+            Math.random() * 1000 + 100
           );
           if (dancerMakerFunctionName === "BlinkyDancer") {
             dancer.$node.addClass("blinkyDancer");
           } else if (dancerMakerFunctionName === "FadeyDancer") {
             dancer.$node.addClass("fadeyDancer");
-            //dancer.$node.cycle();
-          }
+          } else if (dancerMakerFunctionName === "MoveNShaker") {
+            dancer.$node.addClass("moveNShaker");
+          } 
+
           $('body').append(dancer.$node);
         });
+
+  /*     $('.animate').on("click", function(event) {
+        var newTop, newLeft, newSize;
+        setInterval(function(){
+          newTop = Math.random()*800 + 'px'
+          newLeft = Math.random()*800 + 'px'
+        }, 1000);
+        setInterval(function(){$(".dancer").animate({top: newTop})}, 1000)
+        setInterval(function(){$(".dancer").animate({left: newLeft})}, 1000);
+        }) */
+
       });
     </script>
 
